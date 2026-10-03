@@ -1,3 +1,19 @@
+---
+name: ghost-fox-strategy
+description: >-
+  GHOST FOX v2.0 — Ultra-selective infinite trailing. A config override on FOX v1.6
+  with the highest entry bar in the FOX family: score 11+ (13 neutral), 5+ reasons,
+  velocity 0.15+, prevRank 30+, top-10 blocked, no re-entry, max 2 positions and
+  3-5 entries/day. 5-tier DSL High Water trailing from +5% ROE up to 90% of peak.
+  Expect 0-2 trades/day. Use when deploying the Ghost Fox variant of FOX.
+license: MIT
+metadata:
+  author: jason-goldberg
+  version: "2.0"
+  platform: senpi
+  exchange: hyperliquid
+---
+
 # 👻 GHOST FOX v2.0 — Ultra-Selective Infinite Trailing
 
 A trading strategy (config override) based on FOX v1.6. The ghost: you never see it enter, but when it does, it takes everything the move has to give.
@@ -30,16 +46,22 @@ When creating DSL state files, you MUST include:
   "lockMode": "pct_of_high_water",
   "phase2TriggerRoe": 5,
   "tiers": [
-    {"triggerPct": 5,  "lockPct": 40, "breachesRequired": 3},
-    {"triggerPct": 10, "lockPct": 60, "breachesRequired": 2},
-    {"triggerPct": 15, "lockPct": 75, "breachesRequired": 1},
-    {"triggerPct": 20, "lockPct": 85, "breachesRequired": 1},
-    {"triggerPct": 40, "lockPct": 90, "breachesRequired": 1}
+    {"triggerPct": 5,  "lockHwPct": 40, "consecutiveBreachesRequired": 3},
+    {"triggerPct": 10, "lockHwPct": 60, "consecutiveBreachesRequired": 2},
+    {"triggerPct": 15, "lockHwPct": 75, "consecutiveBreachesRequired": 1},
+    {"triggerPct": 20, "lockHwPct": 85, "consecutiveBreachesRequired": 1},
+    {"triggerPct": 40, "lockHwPct": 90, "consecutiveBreachesRequired": 1}
   ]
 }
 ```
 
 **FALLBACK:** Use `tiersLegacyFallback` from config until engine per-tick fix ships.
+
+**If `tiers` or `lockMode` is missing from the state file, the DSL engine falls back to flat 1.5% retrace and High Water Mode is silently disabled. Always verify the state file contains these fields after creation.**
+
+**DSL default:** Use **`ghost-fox-strategy/dsl-profile.json`** when setting up DSL (`dsl-cli.py add-dsl` / `update-dsl` with `--configuration @<path>/ghost-fox-strategy/dsl-profile.json`) unless the user explicitly provides a custom DSL configuration.
+
+**Config override:** [`config/ghost-fox-config.json`](config/ghost-fox-config.json) (same as the block below). v1.0 history: [`references/ghost-fox-v1.md`](references/ghost-fox-v1.md).
 
 ---
 
@@ -134,11 +156,11 @@ At +100% ROE: floor at +90%. At +200% ROE: floor at +180%. The ghost takes 90% o
       {"minScore": 15, "absoluteFloorRoe": 0,   "hardTimeoutMin": 0, "weakPeakCutMin": 0, "deadWeightCutMin": 0}
     ],
     "tiers": [
-      {"triggerPct": 5,  "lockPct": 40, "breachesRequired": 3},
-      {"triggerPct": 10, "lockPct": 60, "breachesRequired": 2},
-      {"triggerPct": 15, "lockPct": 75, "breachesRequired": 1},
-      {"triggerPct": 20, "lockPct": 85, "breachesRequired": 1},
-      {"triggerPct": 40, "lockPct": 90, "breachesRequired": 1}
+      {"triggerPct": 5,  "lockHwPct": 40, "consecutiveBreachesRequired": 3},
+      {"triggerPct": 10, "lockHwPct": 60, "consecutiveBreachesRequired": 2},
+      {"triggerPct": 15, "lockHwPct": 75, "consecutiveBreachesRequired": 1},
+      {"triggerPct": 20, "lockHwPct": 85, "consecutiveBreachesRequired": 1},
+      {"triggerPct": 40, "lockHwPct": 90, "consecutiveBreachesRequired": 1}
     ],
     "tiersLegacyFallback": [
       {"triggerPct": 5,  "lockPct": 2},

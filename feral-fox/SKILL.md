@@ -1,3 +1,19 @@
+---
+name: feral-fox
+description: >-
+  FERAL FOX v3.0 — Production-tuned momentum. A config override on FOX v1.6:
+  score 9+, 4+ reasons, no top-10 block, deep Phase 1 (-50% ROE floor, 120 min
+  timeout), tight Phase 2 High Water trailing from +5% ROE locking 50/75/85/95%
+  of peak. 6 slots, $254 margin per slot, 10x default leverage. Requires DSL
+  High Water Mode. Use when deploying the Feral Fox variant of FOX.
+license: MIT
+metadata:
+  author: jason-goldberg
+  version: "3.0"
+  platform: senpi
+  exchange: hyperliquid
+---
+
 # 🦊 FERAL FOX v3.0 — Production-Tuned Momentum
 
 A trading strategy (config override) based on FOX v1.6. This is the exact configuration running live on the Senpi Predators tracker — every filter, every tier, every threshold captured from the agent's production tuning.
@@ -29,6 +45,10 @@ When creating DSL state files, you MUST include:
 ```
 
 **FALLBACK:** Use `tiersLegacyFallback` from config until engine supports `pct_of_high_water`.
+
+**DSL default:** Use **`feral-fox/dsl-profile.json`** when setting up DSL (`dsl-cli.py add-dsl` / `update-dsl` with `--configuration @<path>/feral-fox/dsl-profile.json`) unless the user explicitly provides a custom DSL configuration.
+
+**Config override:** [`config/feral-fox-config.json`](config/feral-fox-config.json) (same as the block below).
 
 ---
 

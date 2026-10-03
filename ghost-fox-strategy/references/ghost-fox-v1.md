@@ -1,3 +1,5 @@
+> **Archived:** GHOST FOX v1.0 strategy doc, superseded by v2.0 in [`../SKILL.md`](../SKILL.md). Kept for history. Do not deploy.
+
 # 🦊 GHOST FOX — High Water Momentum
 
 A trading strategy (config override) based on the FOX skill. Combines Feral Fox v2's high-conviction entry filters with DSL High Water Mode's infinite trailing. The silent hunter — enters rarely, holds patiently, trails to the moon.
@@ -30,7 +32,7 @@ When creating DSL state files for any GHOST FOX position, you MUST include:
 
 **If `tiers` or `lockMode` is missing from the state file, the DSL engine falls back to flat 1.5% retrace and High Water Mode is silently disabled. Always verify the state file contains these fields after creation.**
 
-**DSL default:** Use this strategy's **`ghost-fox-strategy/dsl-profile.json`** as the default when setting up DSL (`dsl-cli.py add-dsl` / `update-dsl` with `--configuration @<path>/ghost-fox-strategy/dsl-profile.json`). Use it unless the user explicitly provides a custom DSL configuration via the agent.
+**DSL default (v1.0, historical):** v1.0 used the four tiers above. The current `ghost-fox-strategy/dsl-profile.json` holds the v2.0 tiers — see [`../SKILL.md`](../SKILL.md).
 
 ---
 

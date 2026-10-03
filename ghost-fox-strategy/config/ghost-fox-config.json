@@ -1,0 +1,189 @@
+{
+  "basedOn": "fox",
+  "version": "2.0",
+  "name": "Ghost Fox",
+  "description": "Ultra-selective infinite trailing \u2014 highest entry bar in the FOX family, 5-tier High Water to 90%",
+  "budgetSplit": {
+    "copyTradingPct": 10,
+    "autonomousPct": 90
+  },
+  "entryFilters": {
+    "minReasons": 5,
+    "minScore": 11,
+    "minScoreNeutral": 13,
+    "minVelocity": 0.15,
+    "minRankJump": 15,
+    "minRankJumpOrVelocity": 15,
+    "minPrevRank": 30,
+    "topTenBlock": true,
+    "minLeverage": 7,
+    "maxPriceChg4hPct": 3.0,
+    "fjPersistence": "all_immediate",
+    "enforceRegimeDirection": true,
+    "enforceHourlyTrend": true,
+    "timeOfDay": {
+      "bonusHoursUTC": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "bonusPoints": 1,
+      "penaltyHoursUTC": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        0,
+        1
+      ],
+      "penaltyPoints": -2
+    }
+  },
+  "dsl": {
+    "_spec": "https://github.com/Senpi-ai/senpi-skills/blob/main/dsl-dynamic-stop-loss/dsl-high-water-spec%201.0.md",
+    "lockMode": "pct_of_high_water",
+    "phase2TriggerRoe": 5,
+    "phase1HardTimeoutMin": 0,
+    "phase1WeakPeakMin": 0,
+    "phase1DeadWeightMin": 0,
+    "convictionTiers": [
+      {
+        "minScore": 11,
+        "absoluteFloorRoe": -25,
+        "hardTimeoutMin": 0,
+        "weakPeakCutMin": 0,
+        "deadWeightCutMin": 0
+      },
+      {
+        "minScore": 13,
+        "absoluteFloorRoe": -30,
+        "hardTimeoutMin": 0,
+        "weakPeakCutMin": 0,
+        "deadWeightCutMin": 0
+      },
+      {
+        "minScore": 15,
+        "absoluteFloorRoe": 0,
+        "hardTimeoutMin": 0,
+        "weakPeakCutMin": 0,
+        "deadWeightCutMin": 0
+      }
+    ],
+    "tiers": [
+      {
+        "triggerPct": 5,
+        "lockHwPct": 40,
+        "consecutiveBreachesRequired": 3
+      },
+      {
+        "triggerPct": 10,
+        "lockHwPct": 60,
+        "consecutiveBreachesRequired": 2
+      },
+      {
+        "triggerPct": 15,
+        "lockHwPct": 75,
+        "consecutiveBreachesRequired": 1
+      },
+      {
+        "triggerPct": 20,
+        "lockHwPct": 85,
+        "consecutiveBreachesRequired": 1
+      },
+      {
+        "triggerPct": 40,
+        "lockHwPct": 90,
+        "consecutiveBreachesRequired": 1
+      }
+    ],
+    "tiersLegacyFallback": [
+      {
+        "triggerPct": 5,
+        "lockPct": 2
+      },
+      {
+        "triggerPct": 10,
+        "lockPct": 6
+      },
+      {
+        "triggerPct": 15,
+        "lockPct": 11,
+        "retrace": 0.01
+      },
+      {
+        "triggerPct": 20,
+        "lockPct": 17,
+        "retrace": 0.008
+      },
+      {
+        "triggerPct": 40,
+        "lockPct": 36,
+        "retrace": 0.005
+      },
+      {
+        "triggerPct": 60,
+        "lockPct": 54,
+        "retrace": 0.004
+      },
+      {
+        "triggerPct": 80,
+        "lockPct": 72,
+        "retrace": 0.003
+      },
+      {
+        "triggerPct": 100,
+        "lockPct": 90,
+        "retrace": 0.003
+      }
+    ],
+    "stagnationTp": {
+      "enabled": true,
+      "roeMin": 12,
+      "hwStaleMin": 60
+    }
+  },
+  "reentry": {
+    "enabled": false,
+    "_note": "Disabled. The gauntlet is the filter. If it fails, move on."
+  },
+  "risk": {
+    "maxEntriesPerDay": 3,
+    "maxDailyLossPct": 6,
+    "maxDrawdownPct": 18,
+    "maxSingleLossPct": 10,
+    "maxPositions": 2,
+    "maxConsecutiveLosses": 2,
+    "cooldownMinutes": 90,
+    "dynamicSlots": {
+      "enabled": true,
+      "baseMax": 3,
+      "absoluteMax": 5,
+      "unlockThresholds": [
+        {
+          "pnl": 150,
+          "maxEntries": 4
+        },
+        {
+          "pnl": 300,
+          "maxEntries": 5
+        }
+      ]
+    }
+  },
+  "execution": {
+    "entryOrderType": "FEE_OPTIMIZED_LIMIT",
+    "entryEnsureTaker": true,
+    "exitOrderType": "MARKET",
+    "slOrderType": "MARKET",
+    "takeProfitOrderType": "FEE_OPTIMIZED_LIMIT"
+  }
+}

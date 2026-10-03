@@ -1,3 +1,5 @@
+> **Archived:** MAMBA v1.0 strategy doc, superseded by v2.0 in [`../SKILL.md`](../SKILL.md). Kept for the v1.0 → v2.0 post-mortem context. Do not deploy.
+
 # 🐍 MAMBA — Range-Bound High Water
 
 A trading strategy (config override) based on the VIPER skill. Same scanner, same range detection, same support/resistance entries. Different exit geometry — DSL High Water Mode's infinite trailing replaces fixed ROE tiers.
